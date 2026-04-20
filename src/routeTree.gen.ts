@@ -9,6 +9,7 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
+import { Route as FavouriteRouteImport } from './routes/favourite'
 import { Route as ContactRouteImport } from './routes/contact'
 import { Route as AboutRouteImport } from './routes/about'
 import { Route as DashboardRouteRouteImport } from './routes/dashboard/route'
@@ -21,6 +22,11 @@ import { Route as DashboardSkillsRouteImport } from './routes/dashboard/skills'
 import { Route as DashboardSettingsRouteImport } from './routes/dashboard/settings'
 import { Route as UsersSkillsUsernameRouteImport } from './routes/$users/skills/$username'
 
+const FavouriteRoute = FavouriteRouteImport.update({
+  id: '/favourite',
+  path: '/favourite',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const ContactRoute = ContactRouteImport.update({
   id: '/contact',
   path: '/contact',
@@ -82,6 +88,7 @@ export interface FileRoutesByFullPath {
   '/dashboard': typeof DashboardRouteRouteWithChildren
   '/about': typeof AboutRoute
   '/contact': typeof ContactRoute
+  '/favourite': typeof FavouriteRoute
   '/dashboard/settings': typeof DashboardSettingsRoute
   '/dashboard/skills': typeof DashboardSkillsRoute
   '/skills/$skillid': typeof SkillsSkillidRoute
@@ -94,6 +101,7 @@ export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
   '/contact': typeof ContactRoute
+  '/favourite': typeof FavouriteRoute
   '/dashboard/settings': typeof DashboardSettingsRoute
   '/dashboard/skills': typeof DashboardSkillsRoute
   '/skills/$skillid': typeof SkillsSkillidRoute
@@ -108,6 +116,7 @@ export interface FileRoutesById {
   '/dashboard': typeof DashboardRouteRouteWithChildren
   '/about': typeof AboutRoute
   '/contact': typeof ContactRoute
+  '/favourite': typeof FavouriteRoute
   '/dashboard/settings': typeof DashboardSettingsRoute
   '/dashboard/skills': typeof DashboardSkillsRoute
   '/skills/$skillid': typeof SkillsSkillidRoute
@@ -123,6 +132,7 @@ export interface FileRouteTypes {
     | '/dashboard'
     | '/about'
     | '/contact'
+    | '/favourite'
     | '/dashboard/settings'
     | '/dashboard/skills'
     | '/skills/$skillid'
@@ -135,6 +145,7 @@ export interface FileRouteTypes {
     | '/'
     | '/about'
     | '/contact'
+    | '/favourite'
     | '/dashboard/settings'
     | '/dashboard/skills'
     | '/skills/$skillid'
@@ -148,6 +159,7 @@ export interface FileRouteTypes {
     | '/dashboard'
     | '/about'
     | '/contact'
+    | '/favourite'
     | '/dashboard/settings'
     | '/dashboard/skills'
     | '/skills/$skillid'
@@ -162,6 +174,7 @@ export interface RootRouteChildren {
   DashboardRouteRoute: typeof DashboardRouteRouteWithChildren
   AboutRoute: typeof AboutRoute
   ContactRoute: typeof ContactRoute
+  FavouriteRoute: typeof FavouriteRoute
   SkillsSkillidRoute: typeof SkillsSkillidRoute
   SkillsNewRoute: typeof SkillsNewRoute
   SkillsIndexRoute: typeof SkillsIndexRoute
@@ -170,6 +183,13 @@ export interface RootRouteChildren {
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
+    '/favourite': {
+      id: '/favourite'
+      path: '/favourite'
+      fullPath: '/favourite'
+      preLoaderRoute: typeof FavouriteRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/contact': {
       id: '/contact'
       path: '/contact'
@@ -271,6 +291,7 @@ const rootRouteChildren: RootRouteChildren = {
   DashboardRouteRoute: DashboardRouteRouteWithChildren,
   AboutRoute: AboutRoute,
   ContactRoute: ContactRoute,
+  FavouriteRoute: FavouriteRoute,
   SkillsSkillidRoute: SkillsSkillidRoute,
   SkillsNewRoute: SkillsNewRoute,
   SkillsIndexRoute: SkillsIndexRoute,

@@ -1,17 +1,13 @@
-import { createFileRoute, notFound, useRouter } from "@tanstack/react-router";
+import { createFileRoute, useRouter } from "@tanstack/react-router";
 import SkillCard from "#/components/SkillCard";
-
-const POKE_API = "https://pokeapi.co/api/v2/pokemon";
+import { getPokemonFn } from "#/server/pokemon";
 
 export const Route = createFileRoute("/")({
 	component: App,
 	pendingComponent: () => <div className="p-14 text-center">Loading data</div>,
 	pendingMs: 300,
 	loader: async () => {
-		const res = await fetch(POKE_API);
-		// throw notFound( );
-		// throw new Error("khel khatam");
-		const data = await res.json();
+		const data = await getPokemonFn();
 		return data;
 	},
 	errorComponent: ({ error }) => {
@@ -25,7 +21,7 @@ export const Route = createFileRoute("/")({
 			</div>
 		);
 	},
-  notFoundComponent: () => <div className="p-12">Not Found</div>,
+	notFoundComponent: () => <div className="p-12">Not Found</div>,
 });
 
 function App() {
