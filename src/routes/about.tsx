@@ -2,6 +2,15 @@ import { createFileRoute } from '@tanstack/react-router'
 
 export const Route = createFileRoute('/about')({
   component: About,
+  head: () =>({
+    meta: [
+      {title: "About - Learn TanStack"},
+      {
+        name: "description",
+        content: "Learn TanStack is the official documentation for TanStack Router, Query, and Table. Get started with guides, API references, and examples.",
+      }
+    ]
+  })
 })
 
 function About() {
